@@ -4,6 +4,7 @@ import asyncio
 from dotenv import load_dotenv 
 from uuid import uuid4
 from agents.crop_selector_agent.agent import crop_selector_agent
+from agents.weather_risk_agent.agent import weather_risk_agent
 from google.genai import types
 
 load_dotenv()
@@ -26,12 +27,17 @@ async def main():
 
     runner = Runner(
         app_name=APP_NAME,
-        agent = crop_selector_agent,
+        agent = weather_risk_agent,
         session_service=session_service
     )
 
     while True:
         user_input = input("You: ")
+
+        if "exit" in user_input.lower():
+            break 
+            
+            
 
         user_message = types.Content(
             role="user",
@@ -42,6 +48,7 @@ async def main():
             if event.is_final_response():
                 if event.content and event.content.parts:
                     print(f"Agent: {event.content.parts[0].text}")
+                    
 
 asyncio.run(main())
 
