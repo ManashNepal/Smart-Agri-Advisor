@@ -3,7 +3,7 @@ from agents.weather_risk_agent.tools import get_weather_forecast
 
 weather_risk_agent = LlmAgent(
     name="weather_risk_agent",
-    model="gemini-2.5-flash",
+    model="gemini-2.0-flash",
     description="Analyzes forecast and provides weather-based farming advice.",
     instruction="""
     You are a weather expert advisor for farmers.

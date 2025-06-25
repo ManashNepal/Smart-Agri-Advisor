@@ -7,7 +7,7 @@ load_dotenv()
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 
 def get_weather_forecast(location : str):
-    url = f"http://api.weatherapi.com/v1/forecast.json?q={location}&days=7&key={WEATHER_API_KEY}"
+    url = f"http://api.weatherapi.com/v1/forecast.json?q={location}&days=3&key={WEATHER_API_KEY}"
 
     try:
         response = requests.get(url=url)

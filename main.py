@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from uuid import uuid4
 from agents.crop_selector_agent.agent import crop_selector_agent
 from agents.weather_risk_agent.agent import weather_risk_agent
+from root_agent import root_agent
 from google.genai import types
 
 load_dotenv()
@@ -27,7 +28,7 @@ async def main():
 
     runner = Runner(
         app_name=APP_NAME,
-        agent = weather_risk_agent,
+        agent = root_agent,
         session_service=session_service
     )
 

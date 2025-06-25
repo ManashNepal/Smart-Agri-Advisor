@@ -18,7 +18,7 @@ def get_best_crops(state: str, season: str):
             "Annual_Rainfall" : "mean",
             "Fertilizer" : "mean",
             "Pesticide" : "mean",
-            "Area" : "sum"
+            "Area" : "sum" # remove this later
         }).sort_values(by="Yield", ascending=False).head(3).reset_index()
     )
 

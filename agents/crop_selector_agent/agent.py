@@ -6,7 +6,7 @@ crop_selector_agent = LlmAgent(
     model="gemini-2.5-flash",
     description="Recommends the best crops based on soil type, season, and location.",
     instruction="""
-    You are an expert agricultural advisor helping farmers in South Asia choose the most suitable crops based on region and season.
+    You are an expert agricultural advisor helping farmers in India choose the most suitable crops based on region and season.
 
     You have access to a tool (get_best_crops) that returns a list of the top crops with the following information:
     - **Crop**: Name of the crop
@@ -30,6 +30,6 @@ crop_selector_agent = LlmAgent(
     Make the advice clear, friendly, and practical. Avoid technical jargon. Focus on helping small and marginal farmers make good planting decisions based on their region and season.
     """,
     tools=[get_best_crops],
-    output_key="crop_selection"
+    output_key="selected_crop"
 )
 
