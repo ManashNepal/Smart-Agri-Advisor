@@ -1,7 +1,5 @@
 import streamlit as st
-from main import generate_content
-import asyncio
-
+import requests
 
 st.set_page_config(page_title="Smart Agri Advisor", page_icon=":corn:")
 
@@ -34,10 +32,15 @@ if user_choice == "Crop Selection":
 
     if st.button(label="Generate",key="crop_select_button"):
         with st.spinner("Generating..."):
-            agent_output = asyncio.run(generate_content(
-                user_input= f"I am from {state}. Can you suggest me some crops I can plant in {season} season.",
-                agent_name="crop_selector_agent"
-            ))
+            response = requests.post(
+                url="https://smart-agri-advisor-api.onrender.com/chat",
+                json={
+                    "user_input": f"I am from {state}. Can you suggest me some crops I can plant in {season} season.",
+                    "agent_name": "crop_selector_agent"
+                }
+            )
+            agent_output = response.json().get("response", "No response received.")
+            
             st.subheader("Crop Suggestion:", divider=True)
             st.write(agent_output)
 
@@ -71,10 +74,16 @@ elif user_choice == "Fertilizer Planning":
 
     if st.button(label="Generate",key="fertilizer_plan_button"):
         with st.spinner("Generating..."):
-            agent_output = asyncio.run(generate_content(
-                user_input= f"Can you suggest some fertilizer planning for the crop: {crop} in the season: {season}.",
-                agent_name="fertilizer_plan_agent"
-            ))
+            response = requests.post(
+                url="https://smart-agri-advisor-api.onrender.com/chat",
+                json={
+                    "user_input": f"Can you suggest some fertilizer planning for the crop: {crop} in the season: {season}.",
+                    "agent_name": "fertilizer_plan_agent" 
+                }
+            )
+            
+            agent_output = response.json().get("response", "No response received.")
+
             st.subheader("Ferilizer Suggestion:", divider=True)
             st.write(agent_output)
 
@@ -93,9 +102,15 @@ elif user_choice == "Weather Risk Assessment":
     )
     if st.button(label="Generate",key="weather_risk_button"):
         with st.spinner("Generating..."):
-            agent_output = asyncio.run(generate_content(
-                user_input= f"I am from {state}. Can you suggest if I can do plantation at the moment considering the weather?",
-                agent_name="weather_risk_agent"
-            ))
+            response = requests.post(
+                url="https://smart-agri-advisor-api.onrender.com/chat",
+                json={
+                    "user_input": f"I am from {state}. Can you suggest if I can do plantation at the moment considering the weather?",
+                    "agent_name": "weather_risk_agent" 
+                }
+            )
+            
+            agent_output = response.json().get("response", "No response received.")
+
             st.subheader("Weather-based Suggestion:", divider=True)
             st.write(agent_output)
