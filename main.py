@@ -8,23 +8,32 @@ from agents.crop_selector_agent.agent import crop_selector_agent
 from agents.fertilizer_plan_agent.agent import fertilizer_plan_agent
 from agents.weather_risk_agent.agent import weather_risk_agent
 from google.genai import types
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
 
 load_dotenv()
+
+class InputFormat(BaseModel):
+    user_input : str
+    agent_name : str
 
 APP_NAME = "Smart Agri Advisor"
 SESSION_ID = str(uuid4())
 USER_ID = "manash_nepal10"
 
-async def generate_content(user_input : str, agent_name : str):
+@app.post("/chat")
+async def generate_content(data : InputFormat):
     session_service = InMemorySessionService()
 
 
 
-    if agent_name == "crop_selector_agent":
+    if data.agent_name == "crop_selector_agent":
         agent = crop_selector_agent
-    elif agent_name == "fertilizer_plan_agent":
+    elif data.agent_name == "fertilizer_plan_agent":
         agent = fertilizer_plan_agent
-    elif agent_name == "weather_risk_agent":
+    elif data.agent_name == "weather_risk_agent":
         agent = weather_risk_agent
 
     await session_service.create_session(
@@ -40,7 +49,7 @@ async def generate_content(user_input : str, agent_name : str):
     )
 
     while True:
-        user_input = user_input
+        user_input = data.user_input
 
         if "exit" in user_input.lower():
             break 
@@ -58,7 +67,9 @@ async def generate_content(user_input : str, agent_name : str):
                 if event.content and event.content.parts:
                     agent_output = event.content.parts[0].text
         
-        return agent_output
+        return {
+            "response" : agent_output
+        }
                     
 
 
