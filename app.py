@@ -5,6 +5,11 @@ st.set_page_config(page_title="Smart Agri Advisor", page_icon=":corn:")
 
 st.title("Smart Agri Advisor :potted_plant:")
 
+st.write(
+    "> Empowering farmers and agri-enthusiasts with personalized insights, smart recommendations, and up-to-date market intelligence.  \n"
+    "> *Grow smarter, harvest better—your digital companion for modern agriculture.*"
+)
+
 user_choice = st.selectbox(label="Pick a service", options=["None", "Crop Selection", "Fertilizer Planning", "Weather Risk Assessment", "Market Price Assessment"])
 
 if user_choice == "Crop Selection":
