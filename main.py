@@ -36,8 +36,6 @@ USER_ID = "manash_nepal10"
 async def generate_content(data : InputFormat):
     session_service = InMemorySessionService()
 
-
-
     if data.agent_name == "crop_selector_agent":
         agent = crop_selector_agent
     elif data.agent_name == "fertilizer_plan_agent":
@@ -57,28 +55,20 @@ async def generate_content(data : InputFormat):
         session_service=session_service
     )
 
-    while True:
-        user_input = data.user_input
+    user_message = types.Content(
+        role="user",
+        parts=[types.Part(text=data.user_input)]
+    )
 
-        if "exit" in user_input.lower():
-            break 
-            
-            
-
-        user_message = types.Content(
-            role="user",
-            parts=[types.Part(text=user_input)]
-        )
-
-        agent_output = ""
-        for event in runner.run(user_id=USER_ID, session_id=SESSION_ID, new_message=user_message):
-            if event.is_final_response():
-                if event.content and event.content.parts:
-                    agent_output = event.content.parts[0].text
+    agent_output = ""
+    async for event in runner.run_async(user_id=USER_ID, session_id=SESSION_ID, new_message=user_message):
+        if event.is_final_response():
+            if event.content and event.content.parts:
+                agent_output = event.content.parts[0].text
         
-        return {
-            "response" : agent_output
-        }
+    return {
+        "response" : agent_output
+    }
                     
 
 
