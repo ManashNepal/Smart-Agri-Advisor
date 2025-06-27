@@ -35,5 +35,6 @@ fertilizer_plan_agent = LlmAgent(
 
     Tip: (a short, practical advice about fertilizer application)
 
-h    """
+    """,
+    output_key="fertilizer_plan"
 )
