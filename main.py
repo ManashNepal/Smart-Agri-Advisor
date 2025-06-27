@@ -2,11 +2,10 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
 from dotenv import load_dotenv 
 from uuid import uuid4
-from agents.crop_selector_agent.agent import crop_selector_agent
 from agents.weather_risk_agent.agent import weather_risk_agent
 from agents.crop_selector_agent.agent import crop_selector_agent
 from agents.fertilizer_plan_agent.agent import fertilizer_plan_agent
-from agents.weather_risk_agent.agent import weather_risk_agent
+from agents.market_price_agent.agent import market_price_agent
 from google.genai import types
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -42,6 +41,8 @@ async def generate_content(data : InputFormat):
         agent = fertilizer_plan_agent
     elif data.agent_name == "weather_risk_agent":
         agent = weather_risk_agent
+    elif data.agent_name == "market_price_agent":
+        agent = market_price_agent
 
     await session_service.create_session(
         app_name=APP_NAME,
