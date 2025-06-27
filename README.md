@@ -2,16 +2,16 @@
 
 **Smart Agri Advisor** is a modular, AI-powered multi-agent system designed to assist small-scale farmers in India. It provides personalized recommendations and real-time data to help with crucial farming decisions such as crop selection, fertilizer planning, market price analysis, and weather risk assessment.
 
-Hosted API: [https://smart-agri-advisor.onrender.com/chat](https://smart-agri-advisor.onrender.com)
+Hosted API: [https://smart-agri-advisor.onrender.com/chat](https://smart-agri-advisor.onrender.com/chat)
 
 ---
 
 ## 🧠 Project Goals
 
-- ✅ Empower small farmers with real-time, intelligent farming advice.
-- ✅ Reduce risk and improve yield through data-driven decisions.
-- ✅ Modular and scalable system powered by AI agents.
-- ✅ Easy integration via RESTful API.
+✅ Empower small farmers with real-time, intelligent farming advice.
+✅ Reduce risk and improve yield through data-driven decisions.
+✅ Modular and scalable system powered by AI agents.
+✅ Easy integration via RESTful API.
 
 ---
 
