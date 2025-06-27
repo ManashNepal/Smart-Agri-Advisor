@@ -1,0 +1,6 @@
+google-adk
+streamlit
+fastapi
+pydantic
+pandas
+python-dotenv
